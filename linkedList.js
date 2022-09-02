@@ -75,6 +75,35 @@ const linkedList = () => {
     return popped;
   };
 
+  // Returns the node at the given index.
+  const at = index => {
+    let temp = first;
+
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+    return temp.value();
+  };
+
+  // Returns wheather a node is present in the list.
+  const contains = value => {
+    let temp = first;
+    while (temp !== null) {
+      if (temp.value() === value) return true;
+      temp = temp.next;
+    }
+    return false;
+  };
+
+  // Returns the index of the specified node.
+  const find = value => {
+    let temp = first;
+    for (let i = 0; i < size(); i++) {
+      if (at(i) === value) return i;
+    }
+    return null;
+  };
+
   return {
     append,
     toString,
@@ -83,6 +112,9 @@ const linkedList = () => {
     head,
     tail,
     pop,
+    at,
+    contains,
+    find,
   };
 };
 
@@ -98,3 +130,8 @@ console.log(list.tail());
 console.log(list.head());
 console.log('Popped', list.pop());
 console.log(list.toString());
+console.log(list.at(2));
+console.log(list.contains(300));
+console.log(list.contains(3000));
+console.log(list.find(300));
+console.log(list.find(3000));
