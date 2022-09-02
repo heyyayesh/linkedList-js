@@ -104,6 +104,26 @@ const linkedList = () => {
     return null;
   };
 
+  // Inserts node at the given index.
+  const insertAt = (value, index) => {
+    let temp = first;
+    for (let i = 0; i < index - 1; i++) temp = temp.next;
+    const newNode = node(value);
+    newNode.next = temp.next;
+    temp.next = newNode;
+  };
+
+  // Removes node at given index.
+  const removeAt = ind => {
+    let temp = first;
+    for (let j = 0; j < ind - 1; j++) temp = temp.next;
+    const temp2 = temp.next;
+    temp.next = temp2.next;
+    const removed = temp2.value();
+    delete temp2;
+    return removed;
+  };
+
   return {
     append,
     toString,
@@ -115,6 +135,8 @@ const linkedList = () => {
     at,
     contains,
     find,
+    insertAt,
+    removeAt,
   };
 };
 
@@ -125,13 +147,17 @@ list.prepend(300);
 list.prepend(200);
 list.prepend(100);
 console.log(list.toString());
-console.log(list.size());
-console.log(list.tail());
-console.log(list.head());
-console.log('Popped', list.pop());
+console.log('Size: ', list.size());
+console.log('Tail: ', list.tail());
+console.log('Head: ', list.head());
+console.log('Popped: ', list.pop());
 console.log(list.toString());
-console.log(list.at(2));
-console.log(list.contains(300));
-console.log(list.contains(3000));
-console.log(list.find(300));
-console.log(list.find(3000));
+console.log('At index 2: ', list.at(2));
+console.log('List contains 300: ', list.contains(300));
+console.log('List contains 3000: ', list.contains(3000));
+console.log('find 300: ', list.find(300));
+console.log('find 3000: ', list.find(3000));
+list.insertAt(350, 3);
+console.log(list.toString());
+console.log('Removed', list.removeAt(3));
+console.log(list.toString());
