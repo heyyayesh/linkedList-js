@@ -7,23 +7,17 @@ const node = (data = null) => {
 
 const linkedList = () => {
   head = null;
-  tail = null;
 
   // Appends a node to the end of the list.
   const append = value => {
     const newNode = node(value);
 
-    if (head === null) {
-      head = newNode;
-      tail = newNode;
-    } else {
+    if (head === null) head = newNode;
+    else {
       let temp = head;
-      while (temp.next !== null) {
-        temp = temp.next;
-      }
+      while (temp.next !== null) temp = temp.next;
 
       temp.next = newNode;
-      tail = newNode;
     }
   };
 
@@ -44,12 +38,33 @@ const linkedList = () => {
       temp = temp.next;
     }
     str += 'NULL';
-    console.log(str);
+    return str;
+  };
+
+  // Returns the total number of nodes in the list.
+  const size = () => {
+    let temp = head;
+    count = 0;
+    while (temp !== null) {
+      count++;
+      temp = temp.next;
+    }
+
+    return count;
+  };
+
+  // Returns the last node of the list.
+  const tail = () => {
+    let temp = head;
+    while (temp.next !== null) temp = temp.next;
+    return temp.value();
   };
 
   return {
     append,
     toString,
     prepend,
+    size,
+    tail,
   };
 };
